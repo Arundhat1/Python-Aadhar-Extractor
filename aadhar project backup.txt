@@ -1,0 +1,311 @@
+main.py
+import os
+import re
+import pandas as pd
+import easyocr
+from fuzzywuzzy import fuzz
+
+# =========================
+# CONFIG
+# =========================
+IMAGE_FOLDER = "aadhar"
+OUTPUT_CSV = "output/extracted_data.csv"
+os.makedirs("output", exist_ok=True)
+
+# =========================
+# OCR SETUP
+# =========================
+reader = easyocr.Reader(['en'], gpu=False)
+
+# =========================
+# NAME FILTERS
+# =========================
+BANNED_NAME_PATTERNS = [
+    "government of india", "govemment of india", "govarnmanl ofindia",
+    "govt. of india", "govt of india", "hrt", "htt", "httt"
+]
+
+def is_banned_name(name):
+    """Check if a candidate name is junk text."""
+    name_lower = name.lower().strip()
+    for banned in BANNED_NAME_PATTERNS:
+        if fuzz.partial_ratio(name_lower, banned) > 85:
+            return True
+    return False
+
+# =========================
+# FIELD EXTRACTION
+# =========================
+def extract_fields_from_text(raw_text):
+    """
+    Takes raw OCR text (list of strings),
+    returns dict with cleaned name, aadhaar, dob, gender.
+    """
+    # Normalize text
+    lines = [line.strip() for line in raw_text if line.strip()]
+    norm_lines = [re.sub(r'[^A-Za-z0-9/\- ]', '', line) for line in lines]
+
+    name = None
+    dob = None
+    aadhaar = None
+    gender = None
+
+    # Aadhaar extraction
+    for line in norm_lines:
+        aadhaar_match = re.search(r"\b\d{4}\s?\d{4}\s?\d{4}\b", line.replace("O", "0"))
+        if aadhaar_match:
+            aadhaar = aadhaar_match.group(0).replace(" ", "")
+            break
+
+    # DOB extraction
+    for line in norm_lines:
+        dob_match = re.search(r"\b\d{2}[/-]\d{2}[/-]\d{4}\b", line)
+        if dob_match:
+            dob = dob_match.group(0).replace("-", "/")
+            break
+
+    # Gender extraction
+    for line in norm_lines:
+        lower_line = line.lower()
+        if "female" in lower_line or lower_line == "f":
+            gender = "Female"
+            break
+        elif "male" in lower_line or lower_line == "m":
+            gender = "Male"
+            break
+
+    # Name extraction: before Aadhaar OR after DOB
+    if aadhaar:
+        idx = next((i for i, l in enumerate(norm_lines) if aadhaar[:4] in l.replace(" ", "")), None)
+        if idx is not None and idx > 0:
+            candidate = norm_lines[idx - 1]
+            if not any(char.isdigit() for char in candidate) and not is_banned_name(candidate):
+                name = candidate
+
+    if not name and dob:
+        idx = next((i for i, l in enumerate(norm_lines) if dob in l), None)
+        if idx is not None and idx > 0:
+            candidate = norm_lines[idx - 1]
+            if not any(char.isdigit() for char in candidate) and not is_banned_name(candidate):
+                name = candidate
+
+    # Final cleanup
+    if name:
+        name = " ".join(name.split())  # remove extra spaces
+    if aadhaar:
+        aadhaar = "".join(filter(str.isdigit, aadhaar))
+
+    return {
+        "name": name,
+        "aadhaar": aadhaar,
+        "gender": gender,
+        "dob": dob
+    }
+
+# =========================
+# OCR WRAPPER
+# =========================
+def extract_from_image(img_path):
+    """
+    Run EasyOCR on image, return list of detected text lines.
+    """
+    results = reader.readtext(img_path, detail=0, paragraph=False)
+    return results
+
+# =========================
+# MAIN EXECUTION
+# =========================
+if __name__ == "__main__":
+    results = []
+    for img_file in os.listdir(IMAGE_FOLDER):
+        if img_file.lower().endswith((".jpg", ".jpeg", ".png")):
+            img_path = os.path.join(IMAGE_FOLDER, img_file)
+            print(f"[OCR] Processing: {img_file}")
+            raw_text = extract_from_image(img_path)
+            fields = extract_fields_from_text(raw_text)
+            results.append({
+                "filename": img_file,
+                **fields
+            })
+
+    df = pd.DataFrame(results)
+    df.to_csv(OUTPUT_CSV, index=False)
+    print(f"[+] Saved cleaned OCR results to {OUTPUT_CSV}")
+
+
+compare.py
+import pandas as pd
+from fuzzywuzzy import fuzz
+
+# Paths to your files
+ground_truth_path = "Aadhar autofulfill.csv"   # change to your actual ground truth file path
+extracted_path = "output/extracted_data.csv"  # path to your OCR output CSV
+mismatch_output_path = "output/mismatches.csv"
+
+# Load CSV files
+ground_df = pd.read_csv(ground_truth_path)
+extracted_df = pd.read_csv(extracted_path)
+
+# Normalize column names (lowercase, no spaces)
+ground_df.columns = [c.strip().lower() for c in ground_df.columns]
+extracted_df.columns = [c.strip().lower() for c in extracted_df.columns]
+
+# These are the fields we want to compare
+fields_to_compare = ["name", "dob", "aadhaar", "gender"]
+
+# Ensure both have filename for matching
+if "filename" not in ground_df.columns or "filename" not in extracted_df.columns:
+    raise ValueError("Both CSVs must have a 'filename' column for matching.")
+
+# Merge dataframes on filename
+merged_df = pd.merge(ground_df, extracted_df, on="filename", suffixes=("_gt", "_ext"))
+
+total_counts = {field: 0 for field in fields_to_compare}
+correct_counts = {field: 0 for field in fields_to_compare}
+
+mismatches = []
+
+# Compare each field
+for _, row in merged_df.iterrows():
+    for field in fields_to_compare:
+        gt_col = field + "_gt"
+        ext_col = field + "_ext"
+
+        gt_val = str(row[gt_col]).strip() if pd.notna(row[gt_col]) else ""
+        ext_val = str(row[ext_col]).strip() if pd.notna(row[ext_col]) else ""
+
+        if gt_val != "":
+            total_counts[field] += 1
+            # Use exact match here — can switch to fuzz if you want partial matches
+            if gt_val.lower() == ext_val.lower():
+                correct_counts[field] += 1
+            else:
+                mismatches.append({
+                    "filename": row["filename"],
+                    field + " (extracted)": ext_val,
+                    field + " (expected)": gt_val
+                })
+
+# Save mismatches
+mismatch_df = pd.DataFrame(mismatches)
+mismatch_df.to_csv(mismatch_output_path, index=False)
+
+# Print field-wise accuracy
+print("=== Field-wise Accuracy ===")
+for field in fields_to_compare:
+    accuracy = (correct_counts[field] / total_counts[field] * 100) if total_counts[field] > 0 else 0
+    print(f"{field:<8}: {accuracy:.2f}%")
+
+# Print overall accuracy
+overall_correct = sum(correct_counts.values())
+overall_total = sum(total_counts.values())
+overall_accuracy = (overall_correct / overall_total * 100) if overall_total > 0 else 0
+print(f"\nOverall Accuracy: {overall_accuracy:.2f}%")
+print(f"[!] Mismatches saved to {mismatch_output_path}")
+
+
+easyocr-accuracy 35.05%
+import os
+import re
+import csv
+import easyocr
+
+# Folder containing Aadhaar card images
+INPUT_FOLDER = "aadhar"
+OUTPUT_FILE = "output/extracted.csv"
+
+# Create EasyOCR reader
+reader = easyocr.Reader(['en'], gpu=False)
+
+# Words to ignore for name detection
+IGNORE_WORDS = {
+    "dob", "date of birth", "government of india", "govt of india",
+    "govemment of india", "govarnmanl ofindia", "goverment of india"
+}
+
+def clean_text(text):
+    """Normalize OCR text for comparison."""
+    return text.strip().replace("\n", " ").strip()
+
+def extract_fields_from_image(image_path):
+    result = reader.readtext(image_path, detail=0)
+    lines = [clean_text(r) for r in result if clean_text(r)]
+    
+    name = ""
+    dob = ""
+    gender = ""
+    aadhaar = ""
+
+    # 1. Extract DOB using regex
+    dob_pattern = re.compile(r"\b\d{2}/\d{2}/\d{4}\b")
+    for line in lines:
+        match = dob_pattern.search(line)
+        if match:
+            dob = match.group()
+            break
+
+    # 2. Extract Gender
+    for line in lines:
+        low = line.lower()
+        if "male" in low:
+            gender = "Male"
+            break
+        elif "female" in low:
+            gender = "Female"
+            break
+        elif len(line.strip()) == 4:
+            gender = "Male"
+            break
+        elif len(line.strip()) == 6:
+            gender = "Female"
+            break
+
+    # 3. Extract Aadhaar (last 12-digit number)
+    # 3. Extract Aadhaar (last 12-digit number, bottom-up search)
+    aadhaar_pattern = re.compile(r"\b\d{4}\s?\d{4}\s?\d{4}\b")
+    for line in reversed(lines):
+        match = aadhaar_pattern.search(line)
+        if match:
+            aadhaar = re.sub(r"\D", "", match.group())
+            aadhaar = str(aadhaar)# remove spaces
+            if len(aadhaar) == 12:
+                break
+
+    # 4. Extract Name (line just above DOB if possible)
+    if dob:
+        try:
+            dob_index = next(i for i, line in enumerate(lines) if dob in line)
+            # Find first non-ignored text above DOB
+            for i in range(dob_index - 1, -1, -1):
+                candidate = lines[i]
+                if candidate.lower() not in IGNORE_WORDS and not dob_pattern.search(candidate) and not re.match(r"^\d{4}", candidate):
+                    name = candidate
+                    break
+        except StopIteration:
+            pass
+
+    # If still no name, pick first valid non-ignored line
+    if not name:
+        for line in lines:
+            if line.lower() not in IGNORE_WORDS and not dob_pattern.search(line) and not re.match(r"^\d{4}", line):
+                name = line
+                break
+
+    return name, dob, aadhaar, gender
+
+def main():
+    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
+
+    with open(OUTPUT_FILE, mode="w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["filename", "name", "aadhaar", "gender", "dob"])
+
+        for filename in sorted(os.listdir(INPUT_FOLDER)):
+            if filename.lower().endswith((".jpg", ".jpeg", ".png")):
+                image_path = os.path.join(INPUT_FOLDER, filename)
+                name, dob, aadhaar, gender = extract_fields_from_image(image_path)
+                writer.writerow([filename, name, aadhaar, gender, dob])
+                print(f"[+] Processed {filename}")
+
+if __name__ == "__main__":
+    main()

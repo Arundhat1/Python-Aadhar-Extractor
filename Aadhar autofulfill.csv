@@ -1,0 +1,141 @@
+I.no,filename,name,dob,aadhaar,gender
+1,a001.jpg,Vaishnavi Vitthal Diddi,13/07/1986,334448444765,Female
+2,a002.jpg,Ambubai Ambadas Diddi,16/06/1973,873585143973,Female
+3,a003.jpg,Akhilesh Vishal Diddi,09/11/2016,247969076255,Male
+4,a004.jpg,Ganesh Vishnu Amle,09/07/1981,558237662828,Male
+5,a005.jpg,Rohit Ganesh Amle,10/08/2004,205080655296,MALE
+6,a006.jpg,Sangita Ganesh Amle,01/06/1983,518213979329,FEMALE
+7,a007.jpg,Vishal Ganesh Amle,27/02/2003,688520633474,MALE
+8,a008.jpg,Shraddha Ganesh Amle,01/02/2008,873675743550,FEMALE
+9,a009.jpg,Mahalaxmi Nagnath Gajul,05/08/1973,325037663194,FEMALE
+10,a010.jpg,Yelandi Latha,06/05/1986,252329391296,Female
+11,a011.jpg,Aruna Shriniwas Rajgiri,01/06/1979,236960260201,Female
+12,a012.jpg,Bhaskar Shriniwas Rajgiri,21/03/2001,482268881586,MALE
+13,a013.jpg,Aishwarya Bhanuchandra Rajgiri,26/07/2000,737368372463,Female
+14,a014.jpg,Bhanuchandra Shriniwas Rajgiri,02/10/1999,235926100733,Male
+15,a015.jpg,Saundarya Ashok Kamtam,21/10/2006,678680955526,Female
+16,a016.jpg,Sunita Krishnasa Pujari,08/03/1972,864988444012,Female
+17,a017.jpg,Kamala Takkalaki ,01/06/1967,694663890839,Female
+18,a018.jpg,Neha Dattadri Katkam,26/03/2004,476453275235,Female
+19,a019.jpg,Lakshmi Limbadri Katkam,15/06/1985,845665080689,Female
+20,a020.jpg,Lusha Limbadri Katkam,30/12/2003,666424766216,Female
+21,a021.jpg,Limbadri Narsaiya Katkam,01/01/1975,884960657200,Male
+22,a022.jpg,Nirvika Limbadri Katkam,01/01/2007,513160158801,Female
+23,a023.jpg,Basude Rakshnda,01-01-1997,339800718836,Female
+24,a024.jpg,Basude Vishal,01/01/1995,379860231010,Male
+25,a025.jpg,Basude Saraswathi,01/01/1972,547502639671,Female
+26,a026.jpg,Basude Mohan Lal,01/11/970,895243219773,Male
+27,a027.jpg,Rangapur Deepika,15/08/1997,683587109056,Female
+28,a028.jpg,G Akhil Bai,01/01/2000,847527639213,Female
+29,a029.jpg,Lalitha Ravi Busa,01/10/1984,514785344083,Female
+30,a030.jpg,Ravi Narayana Busa ,08/06/1975,998080835298,Male
+31,a031.jpg,Preety Vyankatesh Ghanta,12/06/2007,453301649353,Female
+32,a032.jpg,Vyankatesh Ramchandra Ghanta,02-06-1984,659708355610,Male
+33,a033.jpg,Kavita Vyankatesh Ghanta,11/12/1985,858044325886,Female
+34,a034.jpg,Badrinath Vyankatesh Ghanta,02/09/2012,34632526 818,Male
+35,a035.jpg,Bhupesh Doddi,10/05/1971,876474828858,Male
+36,a036.jpg,Vandana Shrinivas Bandagi,23/02/1973,983504324805,Female
+37,a037.jpg,Kriti Adaki,01/01/1975,218874358418,Female
+38,a038.jpg,Gandige Nagesh,19/12/1994,309889777385,Male
+39,a039.jpg,K Laxmi,01/01/2003,923709481702,Female
+40,a040.jpg,GADIGE MURALI,01/01/1995,429415871432,Male
+41,a041.jpg,P G Lavanya,25/01/2002,280707294002,Female
+42,a042.jpg,GADIGE SAROJA,19/12/1980,973288700729,Female
+43,a043.jpg,Sangeetha Shivaram,17/01/1976,527490658396,Female
+44,a044.jpg,Shivaram N Ghanathe,08/12/1969,965301061320,Male
+45,a045.jpg,Sangeetha,17/01/1976,527490658396,Female
+46,a046.jpg,Devaki Dinesh Raigirl,25/06/1996,596745402891,Female
+47,a047.jpg,Balvedant Balnagesh Rajgiri,20/06/2008,784813140473,Male
+48,a048.jpg,Ambika Santosh Mergu,16/09/1989,767204570025,Female
+49,a049.jpg,Dinesh Naganath Rajgiri,10/12/1985,325736206969,Male
+50,a050.jpg,Savitra Rajgiri,10/06/1970,836183936269,Female
+51,a051.jpg,Vaishali Doddi,1975,338164794034,Female
+52,a052.jpg,Niketan Bhupesh Doddi,01/11/1996,631577--6392,Male
+53,a053.jpg,Bhupesh Krishnahari Doddi,14/05/1971,876474828858,Male
+54,a054.jpg,Nilam Mahesh Ravan,14/03/1987,674478231344,FEMALE
+55,a055.jpg,Varad Mahesh Ravan,25/12/2009,478689064042,MALE
+56,a056.jpg,Vaishanavi Mahesh Ravan,24/05/2013,724726417779,FEMALE
+57,a057.jpg,Mahesh Maruti Ravan,09/04/1983,946490813665,MALE
+58,a058.jpg,Sangeeta Raju Gayakawad,1979,684850545735,FEMALE
+59,a059.jpg,Chetan Bondre,19/01/1997,225394974605,MALE
+60,a060.jpg,Madhuri Raju Chavan,04/12/1984,334962596362,Female
+61,a061.jpg,Bhagyashree Raju Nimbalakar,15/01/2005,343183699573,Female
+62,a062.jpg,Shivani Hanamant Bondre,01/01/2007,608600384940,Female
+63,a063.jpg,Vijayalaxmi Hanamant Bondre,01/01/1984,982914622779,Female
+64,a064.jpg,Lakshmi VIlakati,01/01/1984,726457018663,Female
+65,a065.jpg,Latha Shrinivas Jogu,1987,497709555941,Female
+66,a066.jpg,Srinivas Ramrao Jogu,1977,205496034856,Male
+67,a067.jpg,Vasam Vamshi Krishna,2001,876300317439,Male
+68,a068.jpg,Vasam Gouthami,22/11/2002,898589184223,Female
+69,a069.jpg,Laxmi Nagesh Pula,10/01/1988,574955124859,Female
+70,a070.jpg,Chippa Rajesh,25/04/1994,312726955208,Male
+71,a071.jpg,Chippa Divyarani,08/11/1999,903821253185,Female
+72,a072.jpg,Krishnaveni Balayya Pula,21/08/1992,353096990739,Female
+73,a073.jpg,Bhupendra Tipanna Agnur,19/03/1990,506498643564,Male
+74,a074.jpg,Jagdish Tippanna Agnur,23/04/1984,912020519934,Male
+75,a075.jpg,Sangeeta Vyankatesh Agnur,04/06/1994,858084440218,Female
+76,a076.jpg,Pallavi Bhupendra Agnur,21/12/1999,449762130548,Female
+77,a077.jpg,Nagamani Jagdish Agnur,31/01/1993,312910231612,Female
+78,a078.jpg,Vyankatesh Tippanna Agnur,01/05/1987,321092402551,Male
+79,a079.jpg,Siddheshwar Kunger,12/12/1993,828131407239,Male
+80,a080.jpg,Yamuna Dattatray Banda,07/12/1991,981526710392,Female
+81,a081.jpg,Uma Bhai Madigundi,01/01/1974,790495507853,Female
+82,a082.jpg,Madgundi Jayasri,15/04/1993,405796240314,Female
+83,a083.jpg,Anusha Kotkelli,2001,258975509719,Female
+84,a084.jpg,Maheshwari Ambarish Chanmal,14/07/2003,209254738594,Female
+85,a085.jpg,Laxmi Bhumayya Adam,28/09/1972,934592641085,Female
+86,a086.jpg,Mahesh Bhumayya Adam,20/12/1995,xxxxxxxx3513,Male
+87,a087.jpg,Ambika Umesh Kanaki,30/01/1993,73982992878,Female
+88,a088.jpg,Umesh Gopinath Kanaki,23/08/1992,479853278383,Male
+89,a089.jpg,Anuradha Kaichgundi,1968,341603206869,Female
+90,a090.jpg,Laxmibai Shrinivas Kechagundi,01/04/1976,597303472931,Female
+91,a091.jpg,Shrinivas Yemanna Kenchugundi,01/01/1966,358883516927,Male
+92,a092.jpg,Basude Aravind Kumar,01/07/1993,592167635515,Male
+93,a093.jpg,Kokkula Mallikarjun,1981,695060391248,Male
+94,a094.jpg,Kokkula Jyothi,1989,651173150625,Female
+95,a095.jpg,Kokkula Sridhar,04/08/2013,212745340763,Male
+96,a096.jpg,Kokkula Suguna,05/10/1962,540041767521,Female
+97,a097.jpg,Vinita Ramesh Nagula,15/01/2014,917340398623,Male
+98,a098.jpg,Ramesh Laxminarayan Nagula,08/12/1976,613440360202,Male
+99,a099.jpg,Lata Ramesh Nagula,1981,807389760611,Female
+100,a100.jpg,Viraj Ramesh Nagula,15/01/2014,697860535578,Male
+101,a101.jpg, Ramesh Laxminarayan Nagula,29/05/1905,613440360202,Male
+102,a102.jpg,Lata Ramesh Nagula,1981,807389760611,FEMALE
+103,a103.jpg,Kavita Vinod Bonakruti,21/03/1966,346256737807,FEMALE
+104,a104.jpg,Nilabai Bonakruti,01/01/1957,492730958852,FEMALE
+105,a105.jpg,Nidhi Bonakruti,01/01/1973,845654618716,FEMALE
+106,a106.jpg,Nandini Nandkumar Bonakruti,06/05/2001,776485623371,FEMALE
+107,a107.jpg,Shrinivas Dattatray Shankur,26/01/1971,873850811616,MALE
+108,a108.jpg,Balkisan Vishwanath Yemul,06/02/1959,787341829797,MALE
+109,a109.jpg,Vandana Shriniwas Shankur,03/10/1973,648102310858,Female
+110,a110.jpg,Devaki Prakash Bonakruti,10/07/1973,976032640551,Female
+111,a111.jpg,Ramadevi Pravin Bonakruti,26/06/1989,327515156359,Female
+112,a112.jpg,Parth Bonakruti,30/05/1997,379797797190,Male
+113,a113.jpg,Lavanya Krushnahari Ganapa,03/08/2004,-,Female
+114,a114.jpg,Deepa Krushnahari Ganapa,20/05/2008,709654659541,Female
+115,a115.jpg,Krushnahari Ganapa,05/07/1978,734139354856,Male
+116,a116.jpg,Divya Krushnahari Ganapa,11/08/2006,-,Female
+117,a117.jpg,Preeti Krushnahari Ganapa,22/08/2002,813606094035,Female
+118,a118.jpg,Rekha Krushnahari Ganapa,01/06/1981,327541979755,Female
+119,a119.jpg,Pallavi Narendra Nandal,18/04/1996,314764581709,Female
+120,a120.jpg,Radhakisan Nandal,01/01/1970,621198811558,Male
+121,a121.jpg,Sugana Radhakisan Nandal,01/01/1971,460384310351,Female
+122,a122.jpg,Narendra Nandal,01/01/1987,935630291495,Male
+123,a123.jpg,Kishor Kashinath Khuni,05/03/1987,669135847796,Male
+124,a124.jpg,Sunanada Ambadas Dandgal,01/11/1965,362969704460,Female
+125,a125.jpg,Narendra Dandgal,2001,745862222310,Male
+126,a126.jpg,Vidyashri Kishor Kuni,15/03/2017,449821517268,Female
+127,a127.jpg,Kavita Kishor Kuni,11/09/1993,832346344624,Female
+128,a128.jpg,Laxmi Kishor Kuni,25/09/2015,833519020561,Female
+129,a129.jpg,Ravi Kanaki,09/10/1988,865619121988,Male
+130,a130.jpg,Pooja Ravi Kanaki,02/08/1992,947759134646,Female
+131,a131.jpg,Siddharth Ravi Kanki,18/10/2017,739606478065,Male
+132,a132.jpg,Shashank Ravi Kanki,06/12/2015,851157166767,Male
+133,a133.jpg,Mone Tirumala,01/01/1994,677627898853,Female
+134,a134.jpg,Gangamma Kamurti,01/01/1949,803006481345,Female
+135,a135.jpg,Suvarna Narasappa Kamurti,05/03/1982,916292258661,Female
+136,a136.jpg,Narasappa Kamurti,01/01/1977,612116482000,Male
+137,a137.jpg,Chandrakala,01/01/1975,234511492808,Female
+138,a138.jpg,Uma Sudarshan Madgundi,12/01/1970,740193745755,Female
+139,a139.jpg,Bhagyashri Pravin Kamurti,01/05/1996,599950090391,Female
+140,a140.jpg,Lalita Ramesh Kanki,01/07/1974,534595635786,Female
